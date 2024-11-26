@@ -1,27 +1,45 @@
 #include <iostream>
 using namespace std;
 
+void zanzibarV1();
+void zanzibarV2();
+
 int main() {
-//Tableau comprenant les valeurs d'un lancer
-    int valeurDes[6] = {100,2,3,4,5,60};
-//Variables des 3 lancers de des
-    int lancer1=0;
-    int lancer2=0;
-    int lancer3=0;
-// Demander à l'utlisateur la valeur des 3 des
+
+    zanzibarV1();
+    zanzibarV2();
+    return 0;
+}
+
+void zanzibarV1(){
+    //Variables des 3 lancers de des
+    int de1=0;
+    int de2=0;
+    int de3=0;
+
+    // Demander à l'utlisateur la valeur des 3 des
     cout<<" Saisir la valeur du premier de (entre 1 et 6) ";
-    cin>>lancer1;
+    cin>>de1;
 
     cout<<" Saisir la valeur du second de (entre 1 et 6) ";
-    cin>>lancer2;
+    cin>>de2;
 
     cout<<" Saisir la valeur du troisieme de (entre 1 et 6) ";
-    cin>>lancer3;
+    cin>>de3;
+}
 
+void zanzibarV2(){
+    //Tableau comprenant les valeurs d'un lancer
+    int de[3] = {0};
 
+    // Demander à l'utlisateur la valeur des 3 des
+    cout<<" Saisir la valeur du premier de (entre 1 et 6) ";
+    cin>>de[0];
 
+    cout<<" Saisir la valeur du second de (entre 1 et 6) ";
+    cin>>de[1];
 
+    cout<<" Saisir la valeur du troisieme de (entre 1 et 6) ";
+    cin>>de[2];
 
-
-    return 0;
 }
