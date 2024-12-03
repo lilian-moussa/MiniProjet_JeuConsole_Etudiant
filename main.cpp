@@ -1,68 +1,84 @@
 #include <iostream>
+#include <cstdlib> // Pour utiliser rand() et srand()
+#include <ctime>   // Pour utiliser time() pour initialiser rand()
 using namespace std;
 
+// Fonction de zanzibar pour un match entre 2 joueurs
 void zanzibarV1();
 
-
 int main() {
+    // Initialisation du générateur de nombres aléatoires
+    srand(time(0));
 
+    // Lancer la fonction de match entre deux joueurs
     zanzibarV1();
 
     return 0;
 }
 
-//Fonction de zanzibar
-void zanzibarV1(){
-    //Variables des 3 lancers de des
-    int de1=0;
-    int de2=0;
-    int de3=0;
-    int scoreTour=0; //Score de chaque tours
-    int totalScore=0; //Score total du joueur
+// Fonction de zanzibar pour le match entre 2 joueurs
+void zanzibarV1() {
+    // Variables pour les 3 lancers de dés
+    int de1 = 0, de2 = 0, de3 = 0;
+    int scoreTour = 0;    // Score de chaque tour
+    int totalScoreJoueur1 = 0; // Score total du joueur 1
+    int totalScoreJoueur2 = 0; // Score total du joueur 2
 
-    // Jouer pendant 3 tours
-    for (int tour = 1; tour <= 3; tour++) {
-        cout << "Tour " << tour << " : " << endl;
+    // Score de victoire
+    const int scoreVictoire = 300;
 
-        // Demander à l'utlisateur la valeur des 3 des
-        cout << " Saisir la valeur du premier de (entre 1 et 6) " << endl;
-        cin >> de1;
+    // Jouer jusqu'à ce qu'un joueur atteigne le score de victoire
+    while (totalScoreJoueur1 < scoreVictoire && totalScoreJoueur2 < scoreVictoire) {
+        cout << "\n--- Nouveau Tour ---" << endl;
 
-        cout << " Saisir la valeur du second de (entre 1 et 6) " << endl;
-        cin >> de2;
+        // Joueur 1
+        cout << "Joueur 1, tour de lancement de des : " << endl;
+        de1 = rand() % 6 + 1;  // Génère un nombre entre 1 et 6
+        de2 = rand() % 6 + 1;
+        de3 = rand() % 6 + 1;
+        cout << "Lancer de des : " << de1 << ", " << de2 << ", " << de3 << endl;
 
-        cout << " Saisir la valeur du troisieme de (entre 1 et 6) " << endl;
-        cin >> de3;
+        // Calcul du score pour joueur 1
+        if (de1 == 1 || de2 == 1 || de3 == 1) {  // Cas où un des dés est égal à 1
+            scoreTour = 100;
+        } else if (de1 == 6 || de2 == 6 || de3 == 6) {  // Cas où un des dés est égal à 6
+            scoreTour = 60;
+        } else {  // Cas où les dés sont autres choses que 1 ou 6
+            scoreTour = de1 + de2 + de3;
+        }
+        totalScoreJoueur1 += scoreTour;
+        cout << "Score du joueur 1 ce tour : " << scoreTour << endl;
+        cout << "Score total du joueur 1 : " << totalScoreJoueur1 << endl;
 
-        // Vérifier si les valeurs sont valides (entre 1 et 6)
-        if ((de1 >= 1 && de1 <= 6) && (de2 >= 1 && de2 <= 6) && (de3 >= 1 && de3 <= 6)) {
-            cout << "Les valeurs des lancers sont valides." << endl;
-
-        } else {
-            cout << "Une ou plusieurs valeurs sont incorrectes. Les valeurs doivent être entre 1 et 6." << endl;
+        // Vérification si le joueur 1 a gagné
+        if (totalScoreJoueur1 >= scoreVictoire) {
+            cout << " Joueur 1 a gagné avec un score de " << totalScoreJoueur1 << " points " << endl;
+            break;
         }
 
-        //Boucle des 3 lancés de dés
-        if (de1 == 1 || de2 == 1 || de3 == 1){ //Cas ou dés = 1
-            scoreTour=100;
+        // Joueur 2
+        cout << "Joueur 2, tour de lancement de des : " << endl;
+        de1 = rand() % 6 + 1;  // Génère un nombre entre 1 et 6
+        de2 = rand() % 6 + 1;
+        de3 = rand() % 6 + 1;
+        cout << "Lancer de des : " << de1 << ", " << de2 << ", " << de3 << endl;
+
+        // Calcul du score pour joueur 2
+        if (de1 == 1 || de2 == 1 || de3 == 1) {  // Cas où un des dés est égal à 1
+            scoreTour = 100;
+        } else if (de1 == 6 || de2 == 6 || de3 == 6) {  // Cas où un des dés est égal à 6
+            scoreTour = 60;
+        } else {  // Cas où les dés sont autres choses que 1 ou 6
+            scoreTour = de1 + de2 + de3;
         }
-        else
-            if(de1 == 6 || de2 == 6 || de3 == 6){ // Cas ou dés = 6
-                scoreTour=60;
-            }
-            else
-                if((de1 == 1 || de2 == 1 || de3 == 1) || (de1 == 6 || de2 == 6 || de3 == 6)){ //cas ou dés = 1 et 6
-                    scoreTour= 100;
-            }
-                else{    //Cas ou dés = autres choses que 1 ou 6
+        totalScoreJoueur2 += scoreTour;
+        cout << "Score du joueur 2 ce tour : " << scoreTour << endl;
+        cout << "Score total du joueur 2 : " << totalScoreJoueur2 << endl;
 
-                    scoreTour= de1 + de2 + de3;
-                }
-        totalScore += scoreTour;
-        cout << "Score total apres ce tour : " << totalScore << endl << endl;//Affiche le score de chaque tours
-
+        // Vérification si le joueur 2 a gagné
+        if (totalScoreJoueur2 >= scoreVictoire) {
+            cout << "Joueur 2 a gagne avec un score de " << totalScoreJoueur2 << " points " << endl;
+            break;
+        }
     }
-
-    // Affichage du score final après 3 tours
-    cout << "Le score final du joueur apres 3 tours est : " << totalScore << endl;
 }
